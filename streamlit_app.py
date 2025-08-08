@@ -12,7 +12,7 @@ def load_data():
     df = df.rename(columns=lambda x: x.strip().lower())
     df["date finished reading"] = pd.to_datetime(df["date finished reading"], errors="coerce")
     try:
-       df["# of pages"] = pd.to_numeric(df["pages"], errors="coerce")
+       df["pages"] = pd.to_numeric(df["pages"], errors="coerce")
     except FileNotFoundError:
         st.error(f"The file {DATA_FILE} was not found.")
         st.stop()
@@ -21,7 +21,7 @@ def load_data():
     except pd.errors.ParserError:
         st.error(f"Error parsing the CSV file. Please check the file format.")
     except KeyError:
-        st.error("The '# of pages' column was not found in the excel sheet.")
+        st.error("The 'pages' column was not found in the excel sheet.")
         st.stop()
     return df
 
